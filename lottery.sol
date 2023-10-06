@@ -15,7 +15,7 @@ contract Lottery{
     event ParticipantJioned(address _participant);
 
     modifier minimumValueRequirement(){
-        require(msg.value >= 0.000000000000000001 ether, "Minimum is 0.01 ether to enter lottery");
+        require(msg.value >= 0.00061 ether, "Minimum is 0.00061 ether to enter lottery");
         _;
     }
 
