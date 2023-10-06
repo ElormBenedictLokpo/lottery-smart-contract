@@ -38,12 +38,21 @@ contract Lottery{
         return address(this).balance;
     }
 
+    function random() public view returns(uint256){
+        uint256 random_num = uint256(keccak256(abi.encodePacked(block.timestamp, participants.length)));
+        uint256 result = random_num % participants.length;
+        return result;
+    }
+
     function declareWinner() public isManager{
-        winner_address = payable(participants[1]);
+        uint256 random_index = random();
+        winner_address = payable(participants[random_index]);
         winner_address.transfer(address(this).balance);
 
         participants = new address[](0);
     }
+
+   
 
     function getBalanceOfParticipant(address _address) public view isManager returns(uint256){
         return _address.balance;
